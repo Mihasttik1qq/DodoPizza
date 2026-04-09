@@ -1,0 +1,53 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MauiApp7.Views.ConstructorPage"
+             Title="Конструктор">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Image Source="{Binding SelectedPizza.ImageUrl}" HeightRequest="180" Aspect="AspectFit"/>
+            <Label Text="{Binding SelectedPizza.Name}" FontSize="26" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <Label Text="Размер пиццы:" FontAttributes="Bold"/>
+            <Picker SelectedItem="{Binding SelectedSize}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Маленькая</x:String>
+                        <x:String>Средняя</x:String>
+                        <x:String>Большая</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Label Text="Дополнительные ингредиенты:" FontAttributes="Bold"/>
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Ingredients}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout Spacing="10">
+                            <CheckBox IsChecked="{Binding IsSelected}" Color="Orange">
+                                <CheckBox.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type VerticalStackLayout}}, Path=BindingContext.RefreshPriceCommand}"/>
+                                </CheckBox.GestureRecognizers>
+                            </CheckBox>
+                            <Label Text="{Binding Name}" VerticalOptions="Center"/>
+                            <Label Text="{Binding Price, StringFormat='(+{0} ₽)'}" VerticalOptions="Center" TextColor="Gray"/>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+                <Label Text="Количество:" VerticalOptions="Center"/>
+                <Stepper Value="{Binding Quantity}" Minimum="1" Maximum="10"/>
+                <Label Text="{Binding Quantity}" VerticalOptions="Center" FontSize="18"/>
+            </HorizontalStackLayout>
+
+            <Label Text="{Binding TotalPrice, StringFormat='{0:N0} ₽'}" 
+                   FontSize="28" TextColor="Orange" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <Button Text="В корзину" Command="{Binding AddToCartCommand}" 
+                    BackgroundColor="Orange" CornerRadius="12" HeightRequest="50"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

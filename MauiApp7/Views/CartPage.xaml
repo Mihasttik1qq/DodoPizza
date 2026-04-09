@@ -1,0 +1,30 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp7.Views.CartPage" Title="Корзина">
+    <Grid RowDefinitions="*, Auto">
+        <CollectionView ItemsSource="{Binding CartItems}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="5">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Pizza.Name}" FontAttributes="Bold"/>
+                            <Label Text="{Binding Description}" FontSize="12" TextColor="Gray"/>
+                            <Label Text="{Binding TotalPrice, StringFormat='{0} ₽'}" TextColor="Orange"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <VerticalStackLayout Grid.Row="1" Padding="15">
+            <Label Text="{Binding TotalAmount, StringFormat='Всего: {0} ₽'}" FontSize="20" HorizontalOptions="Center"/>
+            <Button Text="Оформить заказ" 
+        Command="{Binding GoToOrderCommand}" 
+        BackgroundColor="Red"
+        TextColor="White"
+        FontAttributes="Bold"
+        HeightRequest="50"
+        CornerRadius="10"
+        Margin="10"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

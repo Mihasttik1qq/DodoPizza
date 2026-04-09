@@ -1,0 +1,15 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp7.Views.OrderPage"
+             Title="Оформление заказа">
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <Entry Placeholder="Имя" Text="{Binding Name}" />
+        <Entry Placeholder="Телефон" Keyboard="Telephone" Text="{Binding Phone}" />
+        <Editor Placeholder="Адрес" HeightRequest="100" Text="{Binding Address}" />
+
+        <Label Text="{Binding TotalSum, StringFormat='Итого: {0:N0} ₽'}" 
+               FontSize="22" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+        <Button Text="ПОДТВЕРДИТЬ" Command="{Binding ConfirmOrderCommand}" BackgroundColor="Green"/>
+    </VerticalStackLayout>
+</ContentPage>

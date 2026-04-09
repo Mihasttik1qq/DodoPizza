@@ -1,0 +1,19 @@
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:MauiApp7.Views"
+       x:Class="MauiApp7.AppShell">
+
+    <ShellContent Title="Меню"
+                  ContentTemplate="{DataTemplate views:MenuPage}"
+                  Route="menu"/>
+
+    <!-- Конструктор с маршрутом -->
+    <ShellContent Title="Конструктор"
+                  ContentTemplate="{DataTemplate views:ConstructorPage}"
+                  Route="constructor"
+                  IsVisible="False"/>
+
+    <ShellContent Title="Корзина"
+                  ContentTemplate="{DataTemplate views:CartPage}"
+                  Route="cart"/>
+</Shell>

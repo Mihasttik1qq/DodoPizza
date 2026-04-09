@@ -1,0 +1,24 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp7.ViewModels"
+             x:Class="MauiApp7.Views.MenuPage" Title="Меню">
+    <Grid RowDefinitions="*, Auto">
+        <CollectionView ItemsSource="{Binding Pizzas}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="10" Padding="10" CornerRadius="15">
+                        <HorizontalStackLayout Spacing="15">
+                            <Image Source="{Binding ImageUrl}" WidthRequest="100" HeightRequest="100"/>
+                            <VerticalStackLayout VerticalOptions="Center">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18"/>
+                                <Label Text="{Binding BasePrice, StringFormat='от {0} ₽'}" TextColor="Orange"/>
+                                <Button Text="Выбрать" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MenuViewModel}}, Path=SelectPizzaCommand}" CommandParameter="{Binding .}" BackgroundColor="Orange"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Grid.Row="1" Text="Корзина" Command="{Binding GoToCartCommand}" Margin="10" BackgroundColor="Red"/>
+    </Grid>
+</ContentPage>
